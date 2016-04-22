@@ -14,6 +14,12 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+          emailjs.init("user_hIV0gZSB97kIccGghejBb");
+      })();
+    </script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -53,21 +59,22 @@
                       <option value="diagadmin">Diag Admin</option>
               </select>
         </label>
+        <form id="myform" onsubmit="emailjs.sendForm('default_service', 'template_8Ni7NyZ2vbp9d', this); return false;" method="post">
         <div class="list">
             <label class="item item-input">
-              <input type="text" placeholder="ID" id="userName" ng-model="userName">
+              <input type="text" placeholder="ID" id="to_name" ng-model="to_name" name="to_name">
             </label>
             <label class="item item-input">
-              <input type="text" placeholder="First Name" id="firstName" ng-model="firstName">
+              <input type="text" placeholder="First Name" id="from_name" ng-model="from_name" name="from_name">
             </label>
             <label class="item item-input">
               <input type="text" placeholder="Last Name" id="lastName" ng-model="lastName">
             </label>
             <label class="item item-input">
-              <input type="email" placeholder="Email ID" id="emailId" ng-model="emailId">
+              <input type="email" placeholder="Email ID" id="to_email" ng-model="to_email" name="to_email">
             </label>
             <label class="item item-input">
-              <input type="password" placeholder="Password" id="password" ng-model="password">
+              <input type="password" placeholder="Password" id="message_html" ng-model="message_html" name="message_html">
             </label>
             <label class="item item-input">
               <input type="text" placeholder="Phone Number without '-'" maxlength="10" id="phnum" ng-model="phnum">
@@ -86,10 +93,11 @@
               </select>
             </label>
             <div class="button-bar">
-              <button type="submit" class="button button-dark" id="register" name="register" ng_click="registerUser(userName,firstName,lastName,emailId,password,dob,phnum,gender,userType)">Register</button>
+              <button type="submit" class="button button-dark" id="register" name="register" ng_click="registerUser(to_name,from_name,lastName,to_email,message_html,dob,phnum,gender,userType);">Register</button>
               <input type="reset" class="button button-dark" value="Reset">
             </div>
         </div>
+        </form>
       </ion-content>
       <div class="tabs tabs-icon-top">
         <a class="tab-item" href="adminmain.html">

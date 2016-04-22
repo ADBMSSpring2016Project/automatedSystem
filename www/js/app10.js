@@ -77,7 +77,7 @@ $scope.results = [];
                 doctorID: item.doctorID,
                 diagAdminID: item.diagAdminID,
                 completeStatus: "Not Completed",
-                docURL: ""
+                //docURL: "Not Generated"
             });
             
         }else if(item.doctorID === temp && item.completeStatus==='1' && item.patientId === temp1){
@@ -99,7 +99,7 @@ $scope.results = [];
                                 doctorID: item.doctorID,
                                 diagAdminID: item.diagAdminID,
                                 completeStatus: "Not Completed",
-                                docURL: ""
+                                //docURL: "Not Generated"
                             });
                         } else if(item.doctorID===temp && item.completeStatus==='1'){
                             $scope.results.push({

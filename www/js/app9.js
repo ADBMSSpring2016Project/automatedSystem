@@ -78,7 +78,7 @@ $scope.results = [];
                 doctorID: item.doctorID,
                 diagAdminID: item.diagAdminID,
                 completeStatus: "Not Completed",
-                docURL: ""
+                //docURL: ""
             });
             
         }else if(item.patientId === temp){

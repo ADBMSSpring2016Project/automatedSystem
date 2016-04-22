@@ -18,6 +18,13 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        console.log("inside email code");
+          emailjs.init("user_hIV0gZSB97kIccGghejBb");
+      })();
+    </script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
@@ -73,21 +80,40 @@
               </label>
             </div>
             
-            <form>
+            <form  id="myform" onsubmit="emailjs.sendForm('default_service', 'template_8Ni7NyZ2', this); return false;" method="post">
               <div class="list">
               <label class="item item-input">
-                <input type="text" placeholder="Patient ID" id="userName"  ng-model="userName">
+                <input type="text" placeholder="Patient ID" id="message_html"  ng-model="message_html" name="message_html">
               </label>
               <label class="item item-input">
-                <input type="text" placeholder="Doctor ID" id="doctorID"  ng-model="doctorID">
+                <input type="text" placeholder="Doctor ID" id="to_name"  ng-model="to_name" name="to_name">
+              </label>
+              <label class="item item-input">
+                <input type="text" placeholder="Doctor Email ID" id="to_email"  ng-model="to_email" name="to_email">
               </label>
               </div>
               <div class="button-bar">
-                <input type="filepicker" class="button button-dark" data-fp-apikey="AYljSSwVGRzW7wA1rQOclz" onchange="alert(event.fpfile.url);localStorage.setItem('filePx',event.fpfile.url)">   
+                <input type="filepicker" class="button button-dark" data-fp-apikey="AYljSSwVGRzW7wA1rQOclz" onchange="alert('Document Uploaded Successfully');localStorage.setItem('filePx',event.fpfile.url)">   
                 <!--<input type="file" class="button" value="Browse" ng-click="" ng-model="fileP1" id="fileP1">-->
+
+                  <input type="submit" class="button button-dark" value="Upload Documents" ng-click="updateOrder(orderId,message_html,to_name,testType)">
+              </div>
+            </form>
+            
+            <form  id="myform" onsubmit="emailjs.sendForm('default_service', 'template_8Ni7NyZ2', this); return false;" method="post">
+              <div class="list" style="display: none;">
+              <label class="item item-input">
+                <input type="text" placeholder="Patient ID" id="message_html"  ng-model="message_html" name="message_html">
+              </label>
+              <label class="item item-input">
+                <input type="text" placeholder="Doctor ID" id="to_name"  ng-model="to_name" name="to_name">
+              </label>
+              <label class="item item-input">
+                <input type="text" placeholder="Doctor Email ID" id="to_email"  ng-model="to_email" name="to_email">
+              </label>
               </div>
               <div class="button-bar">
-                <input type="submit" class="button button-dark" value="Upload Documents" ng-click="updateOrder(orderId,userName,doctorID,testType)">
+                <input type="submit" class="button button-dark" value="Send Email">
               </div>
               
             </form>
