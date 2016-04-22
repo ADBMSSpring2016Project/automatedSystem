@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" ng-app="myApp">
+<html lang="" >
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -7,6 +7,7 @@
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -17,15 +18,19 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
+    <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
     <script src="js/check.js"></script>
-    <script src="app9.js"></script>
+    <script src="js/app9.js"></script>
   </head>
-  <body onload="getCookie2();">
+  <body onload="getCookie2();"  ng-app="myApp" ng-controller="patDshCtrl">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
@@ -42,19 +47,40 @@
 				</div>
       </ion-header-bar>
       
-      <ion-content ng-controller="patDshCtrl">
-          <table id="personDataTable">
-              <tr>
-                  <th>Order Id</th>
-                  <th>Patient ID</th>
-                  <th>Type of Test</th>
-                  <th>Doctor ID</th>
-                  <th>Diagnostic Admin</th>
-                  <th>Report Completion</th>
-                  <th>Document Report URL</th>
-              </tr>
-              
-          </table>
+      <ion-content>
+          <div id="load1" class="button-bar" ng-init="patDashOrder();">
+          </div>
+          <div id="load2">
+            <form name="personForm" novalidate>
+                <div class="button-bar">
+                  <input type="submit" class="button button-dark" value="Search" ng-click="clickButton(comStatus)">
+                </div>                
+                <table class="demo">
+                  <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Patient ID</th>
+                        <th>Test Type</th>
+                        <th>Doctor ID</th>
+                        <th>Diag Admin ID</th>
+                        <th>Completed Status</th>
+                        <th>Reports Link</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                      <tr data-ng-repeat="result in results">
+                        <td data-title="'orderID'">{{result.orderID}}</td>
+                        <td data-title="'patientId'">{{result.patientId}}</td>
+                        <td data-title="'testType'" >{{result.testType}}</td>
+                        <td data-title="'doctorID'" >{{result.doctorID}}</td>
+                        <td data-title="'diagAdminID'">{{result.diagAdminID}}</td>
+                        <td data-title="'completeStatus'">{{result.completeStatus}}</td>
+                        <td data-title="'docURL'"><a ng-href="{{result.docURL}}">{{result.docURL}}</a></td>
+                      </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
       </ion-content>
       
       <div class="tabs tabs-icon-top">
@@ -62,7 +88,7 @@
           <i class="icon ion-home"></i>
           Home
         </a>
-        <a class="tab-item" onclick="localStorage.removeItem('patID');logoutCookie();" href="login.html">
+        <a class="tab-item" onclick="localStorage.removeItem('admID');localStorage.removeItem('docID');localStorage.removeItem('diagTID');localStorage.removeItem('patID');localStorage.removeItem('data1');localStorage.removeItem('filePx');localStorage.removeItem('loginType');logoutCookie();" href="login.html">
           <i class="icon ion-power"></i>
           Logout
         </a>

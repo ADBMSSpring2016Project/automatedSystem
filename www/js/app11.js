@@ -60,7 +60,7 @@ $scope.results = [];
     //alert(localStorage.getItem('patID'));
     var temp1 = comStatus;
 
-        var temp=localStorage.getItem('patID');
+    var temp=localStorage.getItem('diagTID');
 
     
     $scope.reset();
@@ -68,8 +68,7 @@ $scope.results = [];
 //alert("Inside Click Button");
 //alert(tempData);
     angular.forEach($scope.items, function (item) {
-        //alert(item.patientId);
-        if(item.docURL==='0' && item.patientId === temp && item.completeStatus==='0')
+        if(item.diagAdminID === temp && item.completeStatus==='0' && item.patientId === temp1)
         {       
                 $scope.results.push({
                 orderID: item.orderID,
@@ -81,7 +80,7 @@ $scope.results = [];
                 docURL: ""
             });
             
-        }else if(item.patientId === temp){
+        }else if(item.diagAdminID === temp && item.completeStatus==='1' && item.patientId === temp1){
             $scope.results.push({
                 orderID: item.orderID,
                 patientId: item.patientId,
@@ -91,6 +90,28 @@ $scope.results = [];
                 completeStatus: "Completed",
                 docURL: item.docURL
             });
+        } else if(temp1 === ''){
+                        if(item.diagAdminID===temp && item.completeStatus==='0'){
+                            $scope.results.push({
+                                orderID: item.orderID,
+                                patientId: item.patientId,
+                                testType: item.testType,
+                                doctorID: item.doctorID,
+                                diagAdminID: item.diagAdminID,
+                                completeStatus: "Not Completed",
+                                docURL: ""
+                            });
+                        } else if(item.diagAdminID===temp && item.completeStatus==='1'){
+                            $scope.results.push({
+                                orderID: item.orderID,
+                                patientId: item.patientId,
+                                testType: item.testType,
+                                doctorID: item.doctorID,
+                                diagAdminID: item.diagAdminID,
+                                completeStatus: "Completed",
+                                docURL: item.docURL
+                            });
+                        }
         }
     });
     

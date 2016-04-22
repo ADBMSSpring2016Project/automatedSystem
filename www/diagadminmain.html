@@ -19,12 +19,12 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
-    <script src="js/app.js"></script>
+    <script src="js/app11.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
     <script src="js/check.js"></script>
   </head>
-  <body ng-app="starter" onload="getCookie2();">
+  <body ng-app="myApp" ng-controller="patDshCtrl" onload="getCookie2();">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
@@ -41,6 +41,46 @@
 				</div>
       </ion-header-bar>
       <ion-content>
+        
+        <div id="load1" class="button-bar" ng-init="patDashOrder();">
+          </div>
+          <div id="load2">
+            <form name="personForm" novalidate>
+                <div class="list">
+                  <label class="item item-input">
+                    <input id="pName" name="pName" type="text" placeholder="Patient ID" data-ng-model="enteredValue">
+                  </label>
+                </div>
+                <div class="button-bar">
+                  <input type="submit" class="button button-dark" value="Search" data-ng-click='clickButton(enteredValue)'>
+                </div>                
+                <table class="demo">
+                  <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Patient ID</th>
+                        <th>Test Type</th>
+                        <th>Doctor ID</th>
+                        <th>Diag Admin ID</th>
+                        <th>Completed Status</th>
+                        <th>Reports Link</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                      <tr data-ng-repeat="result in results">
+                        <td data-title="'orderID'">{{result.orderID}}</td>
+                        <td data-title="'patientId'">{{result.patientId}}</td>
+                        <td data-title="'testType'" >{{result.testType}}</td>
+                        <td data-title="'doctorID'" >{{result.doctorID}}</td>
+                        <td data-title="'diagAdminID'">{{result.diagAdminID}}</td>
+                        <td data-title="'completeStatus'">{{result.completeStatus}}</td>
+                        <td data-title="'docURL'"><a ng-href="{{result.docURL}}">{{result.docURL}}</a></td>
+                      </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        
       </ion-content>
       <div class="tabs tabs-icon-top">
         <a class="tab-item" href="diagadminmain.html">
@@ -51,7 +91,7 @@
           <i class="icon ion-star"></i>
           Upload Test Results
         </a>
-        <a class="tab-item" onclick="localStorage.removeItem('diagTID');logoutCookie();" href="login.html">
+        <a class="tab-item" onclick="localStorage.removeItem('admID');localStorage.removeItem('docID');localStorage.removeItem('diagTID');localStorage.removeItem('patID');localStorage.removeItem('data1');localStorage.removeItem('filePx');localStorage.removeItem('loginType');logoutCookie();" href="login.html">
           <i class="icon ion-power"></i>
           Logout
         </a>

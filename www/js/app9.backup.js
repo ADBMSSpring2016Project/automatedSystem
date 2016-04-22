@@ -56,39 +56,22 @@ app.controller("patDshCtrl", function ($scope, $http, $httpParamSerializerJQLike
     
 
 $scope.results = [];
- $scope.clickButton = function(comStatus) {
-    //alert(localStorage.getItem('patID'));
-    var temp1 = comStatus;
-
-        var temp=localStorage.getItem('patID');
-
-    
+ $scope.clickButton = function(enteredValue) {
+    var temp = enteredValue;
     $scope.reset();
     $scope.items = tempData;
-//alert("Inside Click Button");
-//alert(tempData);
+alert("Inside Click Button");
+alert(tempData);
     angular.forEach($scope.items, function (item) {
         //alert(item.patientId);
-        if(item.docURL==='0' && item.patientId === temp && item.completeStatus==='0')
-        {       
-                $scope.results.push({
-                orderID: item.orderID,
-                patientId: item.patientId,
-                testType: item.testType,
-                doctorID: item.doctorID,
-                diagAdminID: item.diagAdminID,
-                completeStatus: "Not Completed",
-                docURL: ""
-            });
-            
-        }else if(item.patientId === temp){
+        if(item.patientId === temp){
             $scope.results.push({
                 orderID: item.orderID,
                 patientId: item.patientId,
                 testType: item.testType,
                 doctorID: item.doctorID,
                 diagAdminID: item.diagAdminID,
-                completeStatus: "Completed",
+                completeStatus: item.completeStatus,
                 docURL: item.docURL
             });
         }
